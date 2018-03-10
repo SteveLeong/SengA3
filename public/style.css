@@ -50,9 +50,11 @@ form button { width: 19.5%; background: #61892f; border: none; padding: 5px; out
 }
 #names li {
     padding: 5px 5px;
+    text-align: center;
 }
 
 p{
     font-size: 30px;
     text-decoration: underline;
+    text-align: center;
 }
