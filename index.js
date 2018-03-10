@@ -17,16 +17,17 @@ app.use(express.static(__dirname + '/public'));
 // listen to 'chat' messages
 io.on('connection', function(socket){
     socket.username = setUser();
+    socket.color = "#86c232"
     userList.push(socket.username);
     updateCurrUsers(userList);
-    socket.emit('chat', 'Your username is ' + socket.username)
+    socket.emit('username', "Your username is " + socket.username)
     socket.on('chat', function(msg){
         let time = getTime();
-        io.emit('chat', time + ' ' + socket.username + ': ' + msg);
+
 
         if (msg.startsWith("/nick ")){
-            newNick = msg.replace('/nick ', '')
-
+            let oldNick = socket.username;
+            let newNick = msg.replace('/nick ', '');
             if(userList.includes(newNick)){
                 socket.emit('chat','This nickname is already be taken.');
             }else{
@@ -36,7 +37,17 @@ io.on('connection', function(socket){
                 }
                 socket.username = newNick;
             }
-            updateCurrUsers(userList)
+            socket.emit('chat',("<b>" + time + " You have successfully changed your nickname to " + "<span style=\"color: " + socket.color + ";\">" + socket.username + "</span>" + "." + "</b>"));
+            socket.broadcast.emit('chat',("<b>" + time + " " + oldNick + " has changed their nickname to " + "<span style=\"color: " + socket.color + ";\">" + socket.username + "</span>" + "." + "</b>"));
+            updateCurrUsers(userList);
+        }else if(msg.startsWith("/nickcolor ")){
+            let newColor = msg.replace('/nickcolor ', '');
+            socket.color = "#" + newColor;
+            socket.emit('chat',("<b>" + time + " You have successfully changed your nickname color to " + "<span style=\"color: " + socket.color + ";\">" + socket.username + "</span>" + "." + "</b>"));
+        }else {
+            socket.emit('chat',("<b>" + time + " <span style=\"color: " + socket.color + ";\">" + socket.username + "</span>" + ": " + msg + "</b>"));
+            socket.broadcast.emit('chat',("<div>" + time + " <span style=\"color: " + socket.color + ";\">" + socket.username + "</span>" + ": " + msg + "</div>"));
+
         }
     });
 
