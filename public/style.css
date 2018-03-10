@@ -16,7 +16,7 @@ form input {
     margin-right: .5%; 
     outline: none; 
     background: rgb(255, 255, 255);}
-form button { width: 19.5%; background: #61892f; border: none; padding: 5px; outline: none; font: 17px Garamond}
+form button { width: 19.5%; background: #61892f; border: none; padding: 5px; outline: none; font: 20px Garamond}
 #messages { list-style-type: none; margin: 0; padding: 0; overflow: auto}
 #messages li { padding: 5px 10px; color: #86c232}
 #messages li:nth-child(odd) { background: #474b4f; }
@@ -24,6 +24,8 @@ form button { width: 19.5%; background: #61892f; border: none; padding: 5px; out
     float: left;
     width: 75vw;
     height: 90vh;
+    background-image: url('');
+    background-size: cover;
     background-color: #222629;
     position: relative;
     display:flex;
@@ -34,6 +36,7 @@ form button { width: 19.5%; background: #61892f; border: none; padding: 5px; out
 .usernames {
     float: right;
     width: 25vw;
+    background-image: url('../img/circles.png');
     background-color: #474b4f;
     padding: 5px;
     height: 100vh;
@@ -43,6 +46,7 @@ form button { width: 19.5%; background: #61892f; border: none; padding: 5px; out
     border-style: solid;
     border-color: #222629;
     border-bottom: none;
+    
 }
 
 #names{
